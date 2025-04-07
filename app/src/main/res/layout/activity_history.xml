@@ -85,6 +85,7 @@
         android:layout_marginTop="16dp"
         android:clipToPadding="false"
         android:paddingBottom="16dp"
+        android:contentDescription="@string/history_recycler_view_desc"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -94,5 +95,6 @@
         app:layout_constraintVertical_bias="0.0"
         tools:itemCount="6"
         tools:listitem="@layout/item_history" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
