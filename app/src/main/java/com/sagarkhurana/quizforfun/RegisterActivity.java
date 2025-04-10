@@ -1,7 +1,6 @@
 package com.sagarkhurana.quizforfun;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.database.sqlite.SQLiteConstraintException;
 import android.os.AsyncTask;
@@ -11,18 +10,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import com.sagarkhurana.quizforfun.data.User;
 import com.sagarkhurana.quizforfun.data.UserDatabase;
 import com.sagarkhurana.quizforfun.data.UserDatabaseClient;
 import com.sagarkhurana.quizforfun.other.SharedPref;
-
-import java.util.ArrayList;
-import java.util.Calendar;
-
 import static com.sagarkhurana.quizforfun.other.Utils.isValidEmail;
 
 public class RegisterActivity extends AppCompatActivity {
+
+    private EditText etUsername, etEmail, etPassword, etConfirmPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,9 +26,10 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         ImageView btnBack = findViewById(R.id.imageView);
-        EditText etUsername = findViewById(R.id.tietUsername);
-        EditText etEmail = findViewById(R.id.tietPassword);
-        EditText etPassword = findViewById(R.id.tiePassword);
+        etUsername = findViewById(R.id.tietUsername);
+        etEmail = findViewById(R.id.tietPassword);
+        etPassword = findViewById(R.id.tiePassword);
+        etConfirmPassword = findViewById(R.id.tieConfirmPassword); // New field
         Button btnRegister = findViewById(R.id.btnRegister);
 
         btnBack.setOnClickListener(new View.OnClickListener() {
@@ -45,51 +42,52 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                
                 String username = etUsername.getText().toString();
                 String email = etEmail.getText().toString();
                 String password = etPassword.getText().toString();
+                String confirmPassword = etConfirmPassword.getText().toString();
 
-                if (!validateInputs(username,email,password)) return;
+                if (!validateInputs(username, email, password, confirmPassword)) return;
 
-                RegisterUserTask registerUserTask = new RegisterUserTask(username,email,password);
+                RegisterUserTask registerUserTask = new RegisterUserTask(username, email, password);
                 registerUserTask.execute();
             }
         });
     }
 
-    private boolean validateInputs(String username,String email,String password){
-
-        if (username.isEmpty()){
+    private boolean validateInputs(String username, String email, String password, String confirmPassword) {
+        if (username.isEmpty()) {
             Toast.makeText(this, getString(R.string.username_cannot_empty), Toast.LENGTH_SHORT).show();
             return false;
         }
-
-        if (email.isEmpty()){
+        if (email.isEmpty()) {
             Toast.makeText(this, getString(R.string.email_cannot_empty), Toast.LENGTH_SHORT).show();
             return false;
         }
-
-        if (!isValidEmail(email)){
+        if (!isValidEmail(email)) {
             Toast.makeText(this, getString(R.string.email_not_valid), Toast.LENGTH_SHORT).show();
             return false;
         }
-
-        if (password.isEmpty()){
+        if (password.isEmpty()) {
             Toast.makeText(this, getString(R.string.password_cannot_empty), Toast.LENGTH_SHORT).show();
             return false;
         }
-
+        if (!password.equals(confirmPassword)) {
+            Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (password.length() < 6) {
+            Toast.makeText(this, "Password must be at least 6 characters", Toast.LENGTH_SHORT).show();
+            return false;
+        }
         return true;
     }
 
-    class RegisterUserTask extends AsyncTask<Void, Void, Void> {
-
+    class RegisterUserTask extends AsyncTask<Void, Void, User> {
         private final String username;
         private final String email;
         private final String password;
-        private User user  ;
-        private boolean isOkay = true ;
+        private boolean isOkay = true;
 
         public RegisterUserTask(String username, String email, String password) {
             this.username = username;
@@ -98,41 +96,32 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         @Override
-        protected Void doInBackground(Void... voids) {
+        protected User doInBackground(Void... voids) {
             UserDatabase databaseClient = UserDatabaseClient.getInstance(getApplicationContext());
-
-            user  = new User(
-                    username,   
-                    email,
-                    password
-            );
-
+            User user = new User(username, email, password);
             try {
                 databaseClient.userDao().insertUser(user);
-            }catch (SQLiteConstraintException e){
-                isOkay =false;
+                return user;
+            } catch (SQLiteConstraintException e) {
+                isOkay = false;
+                return null;
             }
-
-            return null;
         }
 
         @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-
-            if (isOkay){
+        protected void onPostExecute(User user) {
+            super.onPostExecute(user);
+            if (isOkay && user != null) {
                 Toast.makeText(RegisterActivity.this, "User Created!", Toast.LENGTH_SHORT).show();
                 SharedPref sharedPref = SharedPref.getInstance();
-                sharedPref.setUser(RegisterActivity.this,user);
-                Intent intent = new Intent(RegisterActivity.this,MainActivity.class);
+                sharedPref.setUser(RegisterActivity.this, user);
+                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 finish();
-            }else{
-                Toast.makeText(RegisterActivity.this, "This email is already using by someone else", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(RegisterActivity.this, "This email is already in use", Toast.LENGTH_SHORT).show();
             }
-
         }
     }
-
 }

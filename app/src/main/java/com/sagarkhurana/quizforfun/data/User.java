@@ -2,14 +2,10 @@ package com.sagarkhurana.quizforfun.data;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
-import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-
-import java.util.List;
 
 @Entity(tableName = "user")
 public class User implements Parcelable {
@@ -44,10 +40,6 @@ public class User implements Parcelable {
 
     public String getPassword() {
         return password;
-    }
-
-    public static Creator<User> getCREATOR() {
-        return CREATOR;
     }
 
     protected User(Parcel in) {

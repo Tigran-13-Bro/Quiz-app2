@@ -7,12 +7,10 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Transaction;
 import androidx.room.Update;
-
 import java.util.List;
 
 @Dao
 public interface UserDao {
-
     @Insert(onConflict = OnConflictStrategy.ABORT)
     void insertUser(User user);
 
@@ -29,11 +27,10 @@ public interface UserDao {
     void deleteUser(User user);
 
     @Transaction
-    @Query("SELECT DISTINCT *  FROM attempt WHERE email = :email")
+    @Query("SELECT DISTINCT * FROM attempt WHERE email = :email")
     List<Attempt> getUserAndAttemptsWithSameEmail(String email);
 
     @Transaction
     @Query("SELECT SUM(earned) FROM attempt WHERE email = :email")
     int getOverAllPoints(String email);
-
 }
