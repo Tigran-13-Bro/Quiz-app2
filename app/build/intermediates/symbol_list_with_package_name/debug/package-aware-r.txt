@@ -1570,6 +1570,7 @@ drawable btn_radio_off_mtrl
 drawable btn_radio_off_to_on_mtrl_animation
 drawable btn_radio_on_mtrl
 drawable btn_radio_on_to_off_mtrl_animation
+drawable circle_background
 drawable correct
 drawable design_bottom_navigation_item_background
 drawable design_fab_background
@@ -1578,6 +1579,7 @@ drawable design_ic_visibility_off
 drawable design_password_eye
 drawable design_snackbar_background
 drawable dot_background
+drawable goodquestion
 drawable history
 drawable home_bg
 drawable ic_history
@@ -1595,6 +1597,7 @@ drawable icon1
 drawable incorrect
 drawable keys
 drawable logout
+drawable lol
 drawable material_ic_calendar_black_24dp
 drawable material_ic_clear_black_24dp
 drawable material_ic_edit_black_24dp
@@ -1612,6 +1615,7 @@ drawable mtrl_popupmenu_background
 drawable mtrl_popupmenu_background_dark
 drawable mtrl_tabs_default_indicator
 drawable navigation_empty_icon
+drawable newaccicon
 drawable noted
 drawable notification_action_background
 drawable notification_bg
@@ -1639,6 +1643,7 @@ drawable unselected
 drawable worldwide
 drawable worm_dot_background
 drawable worm_dot_stroke_background
+drawable yoirchoice
 id ALT
 id BOTTOM_END
 id BOTTOM_START
@@ -1687,6 +1692,7 @@ id accessibility_custom_action_6
 id accessibility_custom_action_7
 id accessibility_custom_action_8
 id accessibility_custom_action_9
+id accountIcon
 id action_bar
 id action_bar_activity_content
 id action_bar_container
@@ -1719,6 +1725,7 @@ id auto
 id autoComplete
 id autoCompleteToEnd
 id autoCompleteToStart
+id backgroundIcon
 id barrier
 id baseline
 id beginOnFirstDraw
@@ -2063,6 +2070,7 @@ id textinput_helper_text
 id textinput_placeholder
 id textinput_prefix_text
 id textinput_suffix_text
+id thinkingIcon
 id tieConfirmPassword
 id tiePassword
 id tietEnterAnswerMath
@@ -2108,6 +2116,7 @@ id withinBounds
 id worm_dot
 id wrap
 id wrap_content
+id yourChoiceIcon
 id zero_corner_chip
 integer abc_config_activityDefaultDur
 integer abc_config_activityShortDur
