@@ -83,7 +83,7 @@ public class MathQuizActivity extends AppCompatActivity {
 
     private void displayNextQuestions() {
         etAnswer.setText("");
-        tvQuestion.setText(questions.get(currentQuestionIndex) + " = ?");
+        tvQuestion.setText(questions.get(currentQuestionIndex));
         tvQuestionNumber.setText("Current Question: " + (currentQuestionIndex + 1));
 
         if (currentQuestionIndex == Constants.QUESTION_SHOWING  - 1){
@@ -92,7 +92,7 @@ public class MathQuizActivity extends AppCompatActivity {
     }
 
     private void displayData() {
-        tvQuestion.setText(questions.get(currentQuestionIndex) + " = ?");
+        tvQuestion.setText(questions.get(currentQuestionIndex));
         tvQuestionNumber.setText("Current Question: " + (currentQuestionIndex + 1));
     }
 

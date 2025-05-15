@@ -1,0 +1,23 @@
+# Android Studio/IntelliJ
+.idea/
+*.iml
+
+# Gradle
+.gradle/
+build/
+gradle.properties
+
+# Build outputs
+app/build/
+*.apk
+*.aar
+
+# Local configuration
+local.properties
+
+# Log files
+*.log
+
+# macOS
+.DS_Store0
+

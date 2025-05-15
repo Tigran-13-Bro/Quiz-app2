@@ -1,6 +1,7 @@
 package com.sagarkhurana.quizforfun.other;
 
 import android.content.Context;
+import android.os.Build;
 import android.text.TextUtils;
 import android.util.Patterns;
 
@@ -20,66 +21,63 @@ public class Utils {
         return (!TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches());
     }
 
-    public static String formatDate(long time){
-        SimpleDateFormat formatter = new SimpleDateFormat(Constants.DATE_FORMAT, Locale.getDefault());
-
+    public static String formatDate(long time) {
+        String pattern = Build.VERSION.SDK_INT >= Build.VERSION_CODES.N ?
+                Constants.DATE_FORMAT : "dd MMM yyyy hh:mm a";
+        SimpleDateFormat formatter = new SimpleDateFormat(pattern, Locale.getDefault());
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(time);
         return formatter.format(calendar.getTime());
     }
 
-    public static Map<String,String> getMathQuestions(){
+    public static Map<String,String> getMathQuestions() {
         HashMap<String,String> questions = new HashMap<>();
-        questions.put("1+1","2");
-        questions.put("2+2","4");
-        questions.put("3+3","6");
-        questions.put("4+4","8");
-        questions.put("5+5","10");
-        questions.put("6+6","12");
-        questions.put("7+7","14");
-        questions.put("8+8","16");
-        questions.put("9+9","18");
-        questions.put("10+10","20");
-        questions.put("11+11","22");
-        questions.put("12+12","24");
-        questions.put("13+13","26");
-        questions.put("14+14","28");
-        questions.put("15+15","30");
-
+        questions.put("What is the square root of 144?","12");
+        questions.put("What is the value of π (pi) rounded to 2 decimal places?","3.14");
+        questions.put("What is 5² − 3²?","16");
+        questions.put("What is the next prime number after 17?","19");
+        questions.put("What is 15% of 200?","30");
+        questions.put("What is the perimeter of a square with side length 7 cm?","28");
+        questions.put("What is 3/4 as a decimal?","0.75");
+        questions.put("What is (10 + 2) × 3?","36");
+        questions.put("How many sides does a hexagon have?","6");
+        questions.put("If x = 3, what is the value of 2x² + 1?","19");
+        questions.put("What is 0 divided by any non-zero number?","0");
+        questions.put("What is the area of a triangle with base 10 cm and height 6 cm?","30 cm²");
+        questions.put("What is the derivative of x²?","2x");
+        questions.put("How many degrees are there in a right angle?","90");
+        questions.put("If a rectangle has length 10 cm and width 4 cm, what is its area?","40 cm²");
         return questions;
     }
 
-    public static Map<String,String> getRandomMathQuestions(int SIZE){
+    public static Map<String,String> getRandomMathQuestions(int SIZE) {
         HashMap<String,String> questionsMap = new HashMap<>();
         Map<String,String> originalQuestion = getMathQuestions();
-        int originalSize =  originalQuestion.size();
-        ArrayList<String> keyList = new ArrayList<String>(originalQuestion.keySet());
+        int originalSize = originalQuestion.size();
+        ArrayList<String> keyList = new ArrayList<>(originalQuestion.keySet());
 
-        while (questionsMap.size()<=SIZE){
+        while (questionsMap.size() < SIZE) {
             Random random = new Random();
             int randomNumber = random.nextInt(originalSize);
             String question = keyList.get(randomNumber);
-            if (!questionsMap.containsKey(question)){
-                questionsMap.put(question,originalQuestion.get(question));
+            if (!questionsMap.containsKey(question)) {
+                questionsMap.put(question, originalQuestion.get(question));
             }
         }
         return questionsMap;
     }
 
-
-
-    public static Map<String,Map<String,Boolean>> getLiteratureQuestions(){
+    public static Map<String,Map<String,Boolean>> getLiteratureQuestions() {
         HashMap<String,Map<String,Boolean>> questions = new HashMap<>();
-
         HashMap<String,Boolean> answer1 = new HashMap<>();
         answer1.put("Maya Angelou",true);
         answer1.put("Robert Hass",false);
         answer1.put("Jessica Hagdorn",false);
         answer1.put("Micheal Palmer",false);
-        questions.put("Which American writer published ‘A brave and startling truth’ in 1996",answer1);
+        questions.put("Which American writer published ‘A brave and startling truth’ in 1996?",answer1);
 
         HashMap<String,Boolean> answer2 = new HashMap<>();
-        answer2.put("Acrostic ",true);
+        answer2.put("Acrostic",true);
         answer2.put("Haiku",false);
         answer2.put("Epic",false);
         answer2.put("Alliterative",false);
@@ -104,7 +102,7 @@ public class Utils {
         answer5.put("Cymbeline",false);
         answer5.put("Titus Andronicus",false);
         answer5.put("Pericles, Prince of Tyre",false);
-        questions.put("Which famous Shakespeare play does the quote,”Neither a borrower nor a lender be” come from?",answer5);
+        questions.put("Which famous Shakespeare play does the quote, “Neither a borrower nor a lender be” come from?",answer5);
 
         HashMap<String,Boolean> answer6 = new HashMap<>();
         answer6.put("16th",true);
@@ -146,7 +144,7 @@ public class Utils {
         answer11.put("Blake",false);
         answer11.put("Tennyson",false);
         answer11.put("Shelley",false);
-        questions.put("For whom it is said: “sensuousness is a paramount bias of his genius”:",answer11);
+        questions.put("For whom is it said: “sensuousness is a paramount bias of his genius”?",answer11);
 
         HashMap<String,Boolean> answer12 = new HashMap<>();
         answer12.put("Maud",true);
@@ -175,33 +173,31 @@ public class Utils {
         answer15.put("Hardy",false);
         answer15.put("None of the above",false);
         questions.put("Moral choice is everything in the works of:",answer15);
-
         return questions;
     }
 
-    public static Map<String,Map<String,Boolean>> getGeographyQuestions(){
+    public static Map<String,Map<String,Boolean>> getGeographyQuestions() {
         HashMap<String,Map<String,Boolean>> questions = new HashMap<>();
-
         HashMap<String,Boolean> answer1 = new HashMap<>();
         answer1.put("Mustard",false);
         answer1.put("Linseed",false);
-        answer1.put("Groundnut ",true);
-        answer1.put("coconut",false);
-        questions.put("The scarcity or crop failure of which of the following can cause a serious edible oil crisis in India?",answer1);
+        answer1.put("Groundnut",true);
+        answer1.put("Coconut",false);
+        questions.put("Which of the following can cause a serious edible oil crisis in India due to scarcity or crop failure?",answer1);
 
         HashMap<String,Boolean> answer2 = new HashMap<>();
-        answer2.put("old mountains",true);
-        answer2.put("young mountains",false);
-        answer2.put("fold mountains",false);
-        answer2.put("block mountains",false);
-        questions.put("The pennines (Europe), Appalachians (America) and the Aravallis (India) are examples of",answer2);
+        answer2.put("Old mountains",true);
+        answer2.put("Young mountains",false);
+        answer2.put("Fold mountains",false);
+        answer2.put("Block mountains",false);
+        questions.put("The Pennines (Europe), Appalachians (America), and the Aravallis (India) are examples of?",answer2);
 
         HashMap<String,Boolean> answer3 = new HashMap<>();
         answer3.put("5",false);
         answer3.put("13",true);
         answer3.put("8",false);
         answer3.put("10",false);
-        questions.put("The number of major ports in India is",answer3);
+        questions.put("How many major ports are there in India?",answer3);
 
         HashMap<String,Boolean> answer4 = new HashMap<>();
         answer4.put("Gondak",false);
@@ -213,30 +209,30 @@ public class Utils {
         HashMap<String,Boolean> answer5 = new HashMap<>();
         answer5.put("1730 hours",false);
         answer5.put("0630 hours",true);
-        answer5.put("midnight ,GMT",false);
+        answer5.put("Midnight, GMT",false);
         answer5.put("None of the above",false);
-        questions.put("When it is noon IST at Allahabad in India, the time at Greenwich, London, will be",answer5);
+        questions.put("When it is noon IST at Allahabad in India, what is the time at Greenwich, London?",answer5);
 
         HashMap<String,Boolean> answer6 = new HashMap<>();
         answer6.put("USA",false);
         answer6.put("Canada",true);
         answer6.put("Australia",false);
         answer6.put("India",false);
-        questions.put("Which country has the largest coast line?",answer6);
+        questions.put("Which country has the largest coastline?",answer6);
 
         HashMap<String,Boolean> answer7 = new HashMap<>();
         answer7.put("Alluvial soils",true);
         answer7.put("Black soils",false);
         answer7.put("Laterite soils",false);
         answer7.put("Red soils",false);
-        questions.put("Which of the following types of soil are mostly confined to river basins and coastal plains of India?",answer7);
+        questions.put("Which type of soil is mostly confined to river basins and coastal plains of India?",answer7);
 
         HashMap<String,Boolean> answer8 = new HashMap<>();
         answer8.put("USA",true);
         answer8.put("India",false);
         answer8.put("Australia",false);
         answer8.put("France",false);
-        questions.put("Which of the following countries leads in the production of aluminium and its products in the world?",answer8);
+        questions.put("Which country leads in the production of aluminium and its products in the world?",answer8);
 
         HashMap<String,Boolean> answer9 = new HashMap<>();
         answer9.put("Coconut",true);
@@ -250,28 +246,28 @@ public class Utils {
         answer10.put("30.3%",false);
         answer10.put("38.3%",false);
         answer10.put("42.3%",false);
-        questions.put("The proportion of forest to the total national geographical area of India as envisaged by National Forest Policy is",answer10);
+        questions.put("What is the proportion of forest to the total national geographical area of India as envisaged by National Forest Policy?",answer10);
 
         HashMap<String,Boolean> answer11 = new HashMap<>();
         answer11.put("Gandhi Sagar",true);
         answer11.put("Hirakud",false);
         answer11.put("Periyar",false);
         answer11.put("Tungabhadra",false);
-        questions.put("Which of the following dams has generations of power more than irrigation as its main purpose?",answer11);
+        questions.put("Which of the following dams has power generation as its main purpose over irrigation?",answer11);
 
         HashMap<String,Boolean> answer12 = new HashMap<>();
-        answer12.put("The lease Himalayas and the Indo Gangetic plain",true);
-        answer12.put("The foot hills and the Indo Gangetic plain",false);
+        answer12.put("The lesser Himalayas and the Indo-Gangetic plain",true);
+        answer12.put("The foothills and the Indo-Gangetic plain",false);
         answer12.put("The greater Himalayas and the lesser Himalayas",false);
         answer12.put("Indo-Gangetic plains and the peninsula",false);
-        questions.put("The outer Himalayas lie between",answer12);
+        questions.put("The outer Himalayas lie between?",answer12);
 
         HashMap<String,Boolean> answer13 = new HashMap<>();
         answer13.put("Aravalis",true);
         answer13.put("Vindhyas",false);
         answer13.put("Satpuras",false);
         answer13.put("Nilgiri hills",false);
-        questions.put("The oldest mountains in India are",answer13);
+        questions.put("Which are the oldest mountains in India?",answer13);
 
         HashMap<String,Boolean> answer14 = new HashMap<>();
         answer14.put("1/6",true);
@@ -285,32 +281,30 @@ public class Utils {
         answer15.put("Third",false);
         answer15.put("Fourth",false);
         answer15.put("Fifth",false);
-        questions.put("India has the _________ largest population on Earth",answer15);
-
+        questions.put("India has the ___ largest population on Earth?",answer15);
         return questions;
     }
 
-    public static Map<String,Map<String,Boolean>> getRandomLiteratureAndGeographyQuestions(Context context, String subject, int SIZE){
+    public static Map<String,Map<String,Boolean>> getRandomLiteratureAndGeographyQuestions(Context context, String subject, int SIZE) {
         Map<String,Map<String,Boolean>> questionsMap = new HashMap<>();
         Map<String, Map<String, Boolean>> originalQuestion;
-        if (subject.equals(context.getString(R.string.geography))){
+        if (subject.equals(context.getString(R.string.geography))) {
             originalQuestion = getGeographyQuestions();
-        }else{
+        } else {
             originalQuestion = getLiteratureQuestions();
         }
 
-        int originalSize =  originalQuestion.size();
-        ArrayList<String> keyList = new ArrayList<String>(originalQuestion.keySet());
+        int originalSize = originalQuestion.size();
+        ArrayList<String> keyList = new ArrayList<>(originalQuestion.keySet());
 
-        while (questionsMap.size()<=SIZE){
+        while (questionsMap.size() < SIZE) {
             Random random = new Random();
             int randomNumber = random.nextInt(originalSize);
             String question = keyList.get(randomNumber);
-            if (!questionsMap.containsKey(question)){
-                questionsMap.put(question,originalQuestion.get(question));
+            if (!questionsMap.containsKey(question)) {
+                questionsMap.put(question, originalQuestion.get(question));
             }
         }
         return questionsMap;
     }
-
 }
