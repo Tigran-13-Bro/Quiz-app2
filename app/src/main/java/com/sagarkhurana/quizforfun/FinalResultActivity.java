@@ -31,8 +31,6 @@ public class FinalResultActivity extends AppCompatActivity {
         int correctAnswer = intent.getIntExtra(Constants.CORRECT, 0);
         int incorrectAnswer = intent.getIntExtra(Constants.INCORRECT, 0);
         String subject = intent.getStringExtra(Constants.SUBJECT);
-        String email = SharedPref.getInstance().getUser(this).getEmail();
-        int earnedPoints = (correctAnswer * Constants.CORRECT_POINT) - (incorrectAnswer * Constants.INCORRECT_POINT);
 
         tvSubject = findViewById(R.id.textView16);
         tvCorrect = findViewById(R.id.textView19);
@@ -41,10 +39,14 @@ public class FinalResultActivity extends AppCompatActivity {
         tvOverallStatus = findViewById(R.id.textView29);
         tvDate = findViewById(R.id.textView30);
 
+        SharedPref sharedPref = SharedPref.getInstance();
+        boolean isGuest = sharedPref.isGuest(this);
+        String email = isGuest ? "" : sharedPref.getUser(this).getEmail();
+
         findViewById(R.id.imageViewFinalResultQuiz).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(FinalResultActivity.this,MainActivity.class);
+                Intent intent = new Intent(FinalResultActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -53,12 +55,13 @@ public class FinalResultActivity extends AppCompatActivity {
         findViewById(R.id.btnFinishQuiz).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(FinalResultActivity.this,MainActivity.class);
+                Intent intent = new Intent(FinalResultActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
             }
         });
 
+        int earnedPoints = (correctAnswer * Constants.CORRECT_POINT) - (incorrectAnswer * Constants.INCORRECT_POINT);
         Attempt attempt = new Attempt(
                 Calendar.getInstance().getTimeInMillis(),
                 subject,
@@ -68,13 +71,20 @@ public class FinalResultActivity extends AppCompatActivity {
                 email
         );
 
-        getOverAllPoints(attempt);
+        if (isGuest) {
+            // For guests, display results without overall points or saving
+            attempt.setOverallPoints(0); // No overall points for guests
+            displayData(attempt);
+            tvOverallStatus.setText("Guest Mode");
+        } else {
+            getOverAllPoints(attempt);
+        }
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent = new Intent(this,MainActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
     }
@@ -114,14 +124,12 @@ public class FinalResultActivity extends AppCompatActivity {
     }
 
     private void displayData(Attempt attempt) {
-
         tvSubject.setText(attempt.getSubject());
         tvCorrect.setText(String.valueOf(attempt.getCorrect()));
         tvIncorrect.setText(String.valueOf(attempt.getIncorrect()));
         tvEarned.setText(String.valueOf(attempt.getEarned()));
         tvOverallStatus.setText(String.valueOf(attempt.getOverallPoints()));
         tvDate.setText(Utils.formatDate(attempt.getCreatedTime()));
-
     }
 
     class SaveUserAttemptTask extends AsyncTask<Void, Void, Void> {

@@ -93,9 +93,18 @@
         android:layout_marginTop="32dp"
         android:text="@string/login"
         app:layout_constraintEnd_toEndOf="@+id/textInputLayout2"
-        app:layout_constraintHorizontal_bias="0.464"
         app:layout_constraintStart_toStartOf="@+id/textInputLayout2"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnGuest"
+        style="@style/btnStyle"
+        android:layout_width="0dp"
+        android:layout_marginTop="16dp"
+        android:text="Continue as Guest"
+        app:layout_constraintEnd_toEndOf="@+id/btnLogin"
+        app:layout_constraintStart_toStartOf="@+id/btnLogin"
+        app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
 
     <TextView
         android:id="@+id/tvSignUp4"

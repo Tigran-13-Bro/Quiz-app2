@@ -20,15 +20,15 @@ import java.util.ArrayList;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private EditText etUsername,etPassword;
+    private EditText etUsername, etPassword;
 
     @Override
     protected void onStart() {
         super.onStart();
 
         SharedPref sharedPref = SharedPref.getInstance();
-        if (sharedPref.getUser(this)!=null){
-            startActivity(new Intent(this,MainActivity.class));
+        if (sharedPref.getUser(this) != null || sharedPref.isGuest(this)) {
+            startActivity(new Intent(this, MainActivity.class));
             finish();
         }
     }
@@ -43,40 +43,46 @@ public class LoginActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.tiePassword);
         TextView tvSignUp = findViewById(R.id.tvSignUp);
         Button btnLogin = findViewById(R.id.btnLogin);
+        Button btnGuest = findViewById(R.id.btnGuest);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 String username = etUsername.getText().toString();
                 String password = etPassword.getText().toString();
 
-                if (!validaInputs(username,password)) return;
+                if (!validaInputs(username, password)) return;
 
-                LoginUserTask ut = new LoginUserTask(username,password);
+                LoginUserTask ut = new LoginUserTask(username, password);
                 ut.execute();
-
             }
         });
-
 
         tvSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(LoginActivity.this,RegisterActivity.class));
+                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
             }
         });
 
+        btnGuest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPref sharedPref = SharedPref.getInstance();
+                sharedPref.setGuestMode(LoginActivity.this, true);
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                finish();
+            }
+        });
     }
 
     private boolean validaInputs(String username, String password) {
-
-        if (username.isEmpty()){
+        if (username.isEmpty()) {
             Toast.makeText(this, getString(R.string.username_cannot_empty), Toast.LENGTH_SHORT).show();
             return false;
         }
 
-        if (password.isEmpty()){
+        if (password.isEmpty()) {
             Toast.makeText(this, getString(R.string.password_cannot_empty), Toast.LENGTH_SHORT).show();
             return false;
         }
@@ -85,7 +91,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     class LoginUserTask extends AsyncTask<Void, Void, Void> {
-
         private final String username;
         private final String password;
         private ArrayList<User> users = new ArrayList<>();
@@ -105,19 +110,15 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            for (User user : users){
-                if (username.equals(user.getUsername()) && password.equals(user.getPassword())){
+            for (User user : users) {
+                if (username.equals(user.getUsername()) && password.equals(user.getPassword())) {
                     SharedPref sharedPref = SharedPref.getInstance();
-                    sharedPref.setUser(LoginActivity.this,user);
-                    startActivity(new Intent(LoginActivity.this,MainActivity.class));
+                    sharedPref.setUser(LoginActivity.this, user);
+                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     return;
                 }
             }
             Toast.makeText(LoginActivity.this, "User not exist", Toast.LENGTH_SHORT).show();
-
         }
     }
-
 }
-
-

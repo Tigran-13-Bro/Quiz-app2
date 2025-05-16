@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sagarkhurana.quizforfun.adapter.HistoryAdapter;
 import com.sagarkhurana.quizforfun.data.Attempt;
@@ -35,6 +36,13 @@ public class HistoryActivity extends AppCompatActivity {
         tvTotalQuestions = findViewById(R.id.tvTotalQuestionsHistory);
         tvTotalPoints = findViewById(R.id.tvOverAllPointsHistory);
 
+        SharedPref sharedPref = SharedPref.getInstance();
+        if (sharedPref.isGuest(this)) {
+            Toast.makeText(this, "History is not available in guest mode", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
+
         findViewById(R.id.imageViewHistory).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -42,14 +50,12 @@ public class HistoryActivity extends AppCompatActivity {
             }
         });
 
-        String email = SharedPref.getInstance().getUser(this).getEmail();
+        String email = sharedPref.getUser(this).getEmail();
         GetAllUserAttemptTask getAllUserAttemptTask = new GetAllUserAttemptTask(email);
         getAllUserAttemptTask.execute();
     }
 
-
     class GetAllUserAttemptTask extends AsyncTask<Void, Void, Void> {
-
         private final String email;
         ArrayList<Attempt> attempts = new ArrayList<>();
 
@@ -69,7 +75,6 @@ public class HistoryActivity extends AppCompatActivity {
             super.onPostExecute(aVoid);
 
             int overallPoints = 0;
-
             for (Attempt userWithAttempts : attempts) {
                 overallPoints += userWithAttempts.getEarned();
             }
@@ -78,21 +83,15 @@ public class HistoryActivity extends AppCompatActivity {
             tvTotalPoints.setText(String.valueOf(overallPoints));
 
             Collections.sort(attempts, new AttemptCreatedTimeComparator());
-
             HistoryAdapter adapter = new HistoryAdapter(attempts);
             rvHistory.setAdapter(adapter);
-
-
         }
     }
 
     public class AttemptCreatedTimeComparator implements Comparator<Attempt> {
-
         @Override
         public int compare(Attempt attempt, Attempt t1) {
             return String.valueOf(t1.getCreatedTime()).compareTo(String.valueOf(attempt.getCreatedTime()));
         }
     }
-
-
 }
