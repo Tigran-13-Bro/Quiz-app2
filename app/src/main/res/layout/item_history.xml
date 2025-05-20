@@ -7,9 +7,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginStart="24dp"
-
-
-
     android:layout_marginTop="8dp"
     android:layout_marginEnd="24dp"
     android:layout_marginBottom="8dp"
@@ -28,6 +25,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="8dp"
             android:text="@string/subject"
+            android:textColor="#333333"
             app:layout_constraintBottom_toTopOf="@+id/textView21"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -39,6 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/earned"
+            android:textColor="#333333"
             app:layout_constraintBottom_toTopOf="@+id/textView22"
             app:layout_constraintStart_toStartOf="@+id/textView20"
             app:layout_constraintTop_toBottomOf="@+id/textView20" />
@@ -51,6 +50,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp"
             android:text="@string/date"
+            android:textColor="#333333"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/textView21"
             app:layout_constraintTop_toBottomOf="@+id/textView21" />
@@ -61,7 +61,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:textColor="@color/peach"
+            android:textColor="#333333"
             app:layout_constraintBottom_toBottomOf="@+id/textView20"
             app:layout_constraintStart_toEndOf="@+id/textView20"
             app:layout_constraintTop_toTopOf="@+id/textView20"
@@ -73,7 +73,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:textColor="@color/peach"
+            android:textColor="#333333"
             app:layout_constraintBottom_toBottomOf="@+id/textView21"
             app:layout_constraintStart_toEndOf="@+id/textView21"
             app:layout_constraintTop_toTopOf="@+id/textView21"
@@ -85,7 +85,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:textColor="@color/peach"
+            android:textColor="#333333"
             app:layout_constraintBottom_toBottomOf="@+id/textView22"
             app:layout_constraintStart_toEndOf="@+id/textView22"
             app:layout_constraintTop_toTopOf="@+id/textView22"

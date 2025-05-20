@@ -27,6 +27,7 @@
         android:layout_marginStart="24dp"
         android:text="@string/history"
         style="@style/titleTextStyle"
+        android:textColor="#333333"
         app:layout_constraintBottom_toBottomOf="@+id/imageViewHistory"
         app:layout_constraintStart_toEndOf="@+id/imageViewHistory"
         app:layout_constraintTop_toTopOf="@+id/imageViewHistory" />
@@ -38,6 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="@string/overall_points"
+        android:textColor="#333333"
         app:layout_constraintStart_toStartOf="@+id/imageViewHistory"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -49,6 +51,7 @@
         android:layout_marginTop="16dp"
         android:text="@string/total_questions"
         style="@style/text_heading"
+        android:textColor="#333333"
         app:layout_constraintStart_toStartOf="@+id/textView9"
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
@@ -60,7 +63,7 @@
         android:layout_marginBottom="11dp"
         tools:text="60"
         style="@style/text_heading"
-        android:textColor="@color/peach"
+        android:textColor="#333333"
         android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView9"
         app:layout_constraintStart_toEndOf="@+id/textView9"
@@ -73,7 +76,7 @@
         android:layout_marginStart="16dp"
         tools:text="16"
         style="@style/text_heading"
-        android:textColor="@color/peach"
+        android:textColor="#333333"
         android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView17"
         app:layout_constraintStart_toEndOf="@+id/textView17"
@@ -96,6 +99,5 @@
         app:layout_constraintVertical_bias="0.0"
         tools:itemCount="6"
         tools:listitem="@layout/item_history" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

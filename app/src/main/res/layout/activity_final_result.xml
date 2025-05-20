@@ -27,6 +27,7 @@
         android:layout_marginStart="24dp"
         android:text="@string/final_result"
         style="@style/titleTextStyle"
+        android:textColor="#333333"
         app:layout_constraintBottom_toBottomOf="@+id/imageViewFinalResultQuiz"
         app:layout_constraintStart_toEndOf="@+id/imageViewFinalResultQuiz"
         app:layout_constraintTop_toTopOf="@+id/imageViewFinalResultQuiz" />
@@ -36,7 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:textColor="@color/black"
+        android:textColor="#333333"
         android:textStyle="bold"
         android:textSize="18sp"
         tools:text="Well Done, kevin0078"
@@ -50,6 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
         android:text="@string/subject"
+        android:textColor="#333333"
         app:layout_constraintStart_toStartOf="@+id/tvWellDone"
         app:layout_constraintTop_toBottomOf="@+id/tvWellDone" />
 
@@ -60,6 +62,7 @@
         android:layout_marginTop="16dp"
         android:text="@string/correct"
         style="@style/text_heading"
+        android:textColor="#333333"
         app:layout_constraintStart_toStartOf="@+id/textView10"
         app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
@@ -70,6 +73,7 @@
         android:layout_marginTop="16dp"
         android:text="@string/incorrect"
         style="@style/text_heading"
+        android:textColor="#333333"
         app:layout_constraintStart_toStartOf="@+id/textView11"
         app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
@@ -80,6 +84,7 @@
         android:layout_marginTop="16dp"
         android:text="@string/earned"
         style="@style/text_heading"
+        android:textColor="#333333"
         app:layout_constraintStart_toStartOf="@+id/textView12"
         app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
@@ -90,6 +95,7 @@
         android:layout_marginTop="16dp"
         android:text="@string/overall_points"
         style="@style/text_heading"
+        android:textColor="#333333"
         app:layout_constraintStart_toStartOf="@+id/textView13"
         app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
@@ -100,6 +106,7 @@
         android:layout_marginTop="16dp"
         android:text="@string/date"
         style="@style/text_heading"
+        android:textColor="#333333"
         app:layout_constraintStart_toStartOf="@+id/textView14"
         app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
@@ -110,6 +117,7 @@
         android:layout_marginStart="16dp"
         tools:text="Math"
         style="@style/text_value_heading"
+        android:textColor="#333333"
         app:layout_constraintBottom_toBottomOf="@+id/textView10"
         app:layout_constraintStart_toEndOf="@+id/textView14"
         app:layout_constraintTop_toTopOf="@+id/textView10" />
@@ -134,6 +142,7 @@
         android:layout_height="wrap_content"
         tools:text="3"
         style="@style/text_value_heading"
+        android:textColor="#333333"
         app:layout_constraintBottom_toBottomOf="@+id/textView11"
         app:layout_constraintStart_toStartOf="@+id/textView16"
         app:layout_constraintTop_toTopOf="@+id/textView11" />
@@ -144,6 +153,7 @@
         android:layout_height="wrap_content"
         tools:text="2"
         style="@style/text_value_heading"
+        android:textColor="#333333"
         app:layout_constraintBottom_toBottomOf="@+id/textView12"
         app:layout_constraintStart_toStartOf="@+id/textView19"
         app:layout_constraintTop_toTopOf="@+id/textView12" />
@@ -155,6 +165,7 @@
         android:layout_marginStart="1dp"
         tools:text="20"
         style="@style/text_value_heading"
+        android:textColor="#333333"
         app:layout_constraintBottom_toBottomOf="@+id/textView13"
         app:layout_constraintStart_toStartOf="@+id/textView27"
         app:layout_constraintTop_toTopOf="@+id/textView13" />
@@ -165,6 +176,7 @@
         android:layout_height="wrap_content"
         tools:text="60"
         style="@style/text_value_heading"
+        android:textColor="#333333"
         app:layout_constraintBottom_toBottomOf="@+id/textView14"
         app:layout_constraintStart_toStartOf="@+id/textView28"
         app:layout_constraintTop_toTopOf="@+id/textView14" />
@@ -175,6 +187,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
+        android:textColor="#333333"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/textView29"
         app:layout_constraintTop_toTopOf="@+id/textView15"
